@@ -1,0 +1,8 @@
+{
+  "name": "AuraQuote — Personalized Motivational Cards",
+  "description": "Generate deeply personalized motivational quotes harmonizing your profession and hobbies, rendered on bespoke exportable visual cards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
