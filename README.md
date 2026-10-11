@@ -1,4 +1,5 @@
 AuraQuote — Personalized Motivational Cards
+Web address: https://motivitamine.onrender.com/ 
 A full-stack web application that uses Google Gemini AI to synthesize bespoke motivational quotes harmonizing an individual's profession with their creative hobbies and passions. Quotes are rendered on customizable, high-resolution aesthetic cards ready for instant download as PNG images or PDF prints.
 Features
 Personalized AI Synthesis: Blends the discipline and mechanics of any occupation with the freedom and spirit of any hobby using Gemini 3.8 Flash.
