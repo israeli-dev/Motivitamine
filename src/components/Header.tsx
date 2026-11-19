@@ -18,7 +18,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Zone 1: Brand wordmark as single text element */}
         <button
           onClick={onReset}
-          className="text-left group cursor-pointer focus:outline-none"
+          className="text-left group cursor-pointer rounded focus-visible:outline-2 focus-visible:outline-amber-300"
         >
           <span className="font-garamond text-2xl font-semibold tracking-tight text-white transition-colors group-hover:text-amber-300">
             AuraQuote

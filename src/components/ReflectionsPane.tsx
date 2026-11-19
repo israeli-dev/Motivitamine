@@ -1,6 +1,6 @@
 import React from 'react';
-import { QuoteData } from '../types';
-import { Lightbulb, Compass, Sparkles, Feather } from 'lucide-react';
+import type { QuoteData } from '../types';
+import { Feather } from 'lucide-react';
 
 interface ReflectionsPaneProps {
   quoteData: QuoteData;
@@ -26,10 +26,6 @@ export const ReflectionsPane: React.FC<ReflectionsPaneProps> = ({ quoteData }) =
           <p className="text-sm sm:text-base leading-relaxed text-slate-300">
             {quoteData.reflection}
           </p>
-          <div className="rounded-xl border border-white/5 bg-white/[0.02] p-4 text-xs text-slate-400">
-            <span className="font-semibold text-amber-300">Why this resonance matters: </span>
-            A career in <span className="text-white font-medium">{quoteData.occupation}</span> demands rigorous intentionality and specialized competence. Engaging in <span className="text-white font-medium">{quoteData.hobbies}</span> provides the cognitive counterweight—an arena of creative discovery where play, flow, and intuition rejuvenate your professional resilience.
-          </div>
         </div>
 
         {/* Breakdown highlights */}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardCustomization, AspectRatioType, FontStyleType, BackdropId } from '../types';
+import type { CardCustomization, AspectRatioType, FontStyleType } from '../types';
 import { BACKDROP_OPTIONS } from '../data/backdrops';
 import {
   Download,
@@ -7,10 +7,6 @@ import {
   Check,
   Bookmark,
   BookmarkCheck,
-  Maximize2,
-  Type,
-  Sliders,
-  Sparkles,
   Printer,
 } from 'lucide-react';
 
@@ -24,6 +20,7 @@ interface CardCustomizerProps {
   isDownloading: boolean;
   isCopied: boolean;
   isSaved: boolean;
+  actionError: string;
 }
 
 export const CardCustomizer: React.FC<CardCustomizerProps> = ({
@@ -36,6 +33,7 @@ export const CardCustomizer: React.FC<CardCustomizerProps> = ({
   isDownloading,
   isCopied,
   isSaved,
+  actionError,
 }) => {
   const aspectRatios: Array<{ id: AspectRatioType; label: string; iconLabel: string }> = [
     { id: '1:1', label: 'Square (1:1)', iconLabel: '1:1 Post' },
@@ -112,6 +110,7 @@ export const CardCustomizer: React.FC<CardCustomizerProps> = ({
           <button
             type="button"
             onClick={onSaveFavorite}
+            aria-pressed={isSaved}
             className="flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.05] px-4 py-2.5 text-xs font-semibold text-slate-200 hover:bg-white/[0.1] hover:text-white active:scale-95 transition-all"
           >
             {isSaved ? (
@@ -131,6 +130,7 @@ export const CardCustomizer: React.FC<CardCustomizerProps> = ({
           <button
             type="button"
             onClick={onPrintPdf}
+            disabled={isDownloading}
             className="flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.05] px-4 py-2.5 text-xs font-semibold text-slate-200 hover:bg-white/[0.1] hover:text-white active:scale-95 transition-all"
           >
             <Printer className="h-3.5 w-3.5 text-slate-400" />
@@ -139,6 +139,7 @@ export const CardCustomizer: React.FC<CardCustomizerProps> = ({
         </div>
       </div>
 
+      {actionError && <p role="alert" className="text-sm text-red-200">{actionError}</p>}
       <div className="h-[1px] w-full bg-white/10" />
 
       {/* Backdrop Theme Gallery */}
@@ -154,6 +155,7 @@ export const CardCustomizer: React.FC<CardCustomizerProps> = ({
                 key={bg.id}
                 type="button"
                 onClick={() => onChange({ backdrop: bg.id })}
+                aria-pressed={isSelected}
                 className={`group relative h-20 rounded-xl overflow-hidden border text-left transition-all ${
                   isSelected
                     ? 'border-amber-400 ring-2 ring-amber-400/40 scale-[1.02]'
@@ -163,7 +165,7 @@ export const CardCustomizer: React.FC<CardCustomizerProps> = ({
                 {bg.imageUrl ? (
                   <img
                     src={bg.imageUrl}
-                    alt={bg.name}
+                    alt=""
                     referrerPolicy="no-referrer"
                     className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
@@ -198,6 +200,7 @@ export const CardCustomizer: React.FC<CardCustomizerProps> = ({
                 key={ar.id}
                 type="button"
                 onClick={() => onChange({ aspectRatio: ar.id })}
+                aria-pressed={customization.aspectRatio === ar.id}
                 className={`rounded-xl border px-3 py-2 text-center text-xs font-medium transition-all ${
                   customization.aspectRatio === ar.id
                     ? 'border-amber-400 bg-amber-400/15 text-white'
@@ -221,6 +224,7 @@ export const CardCustomizer: React.FC<CardCustomizerProps> = ({
                 key={font.id}
                 type="button"
                 onClick={() => onChange({ fontStyle: font.id })}
+                aria-pressed={customization.fontStyle === font.id}
                 className={`rounded-xl border px-3 py-2 text-left transition-all ${
                   customization.fontStyle === font.id
                     ? 'border-amber-400 bg-amber-400/15 text-white'
@@ -248,6 +252,7 @@ export const CardCustomizer: React.FC<CardCustomizerProps> = ({
                 key={fs.id}
                 type="button"
                 onClick={() => onChange({ fontSize: fs.id })}
+                aria-pressed={customization.fontSize === fs.id}
                 className={`rounded-xl border px-2 py-1.5 text-center text-xs font-medium transition-all ${
                   customization.fontSize === fs.id
                     ? 'border-amber-400 bg-amber-400/15 text-white'
@@ -263,7 +268,7 @@ export const CardCustomizer: React.FC<CardCustomizerProps> = ({
         {/* Contrast Scrim Opacity */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <label htmlFor="scrim-opacity" className="text-xs font-semibold uppercase tracking-wider text-slate-400">
               Legibility Scrim
             </label>
             <span className="text-xs text-amber-300 font-mono">
@@ -272,6 +277,7 @@ export const CardCustomizer: React.FC<CardCustomizerProps> = ({
           </div>
           <input
             type="range"
+            id="scrim-opacity"
             min={0.3}
             max={0.88}
             step={0.02}

@@ -2,7 +2,7 @@ import summitImg from '../assets/images/backdrop_mountain_summit_1790954316069.j
 import studioImg from '../assets/images/backdrop_creative_studio_1790954328549.jpg';
 import cosmosImg from '../assets/images/backdrop_cosmic_starlight_1790954345417.jpg';
 import zenImg from '../assets/images/backdrop_zen_garden_1790954357358.jpg';
-import { BackdropId } from '../types';
+import type { BackdropId } from '../types';
 
 export interface BackdropOption {
   id: BackdropId;
