@@ -1,3 +1,5 @@
+import type { Tone } from '../shared/quote.js';
+
 export interface QuoteData {
   id: string;
   quote: string;
@@ -7,9 +9,11 @@ export interface QuoteData {
   occupation: string;
   hobbies: string;
   name?: string;
-  tone: 'empowering' | 'philosophical' | 'zen' | 'poetic' | 'witty';
+  tone: Tone;
   createdAt: number;
-  mood?: string;
+  mood?: BackdropId;
+  source?: 'gemini' | 'sample';
+  savedCustomization?: CardCustomization;
 }
 
 export type AspectRatioType = '1:1' | '9:16' | '16:9';
@@ -20,7 +24,7 @@ export interface CardCustomization {
   aspectRatio: AspectRatioType;
   fontStyle: FontStyleType;
   backdrop: BackdropId;
-  scrimOpacity: number; // 0.3 to 0.85
+  scrimOpacity: number;
   showAttribution: boolean;
   showThemeTag: boolean;
   showBorder: boolean;

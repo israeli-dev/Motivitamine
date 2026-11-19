@@ -1,9 +1,11 @@
+import type { Tone } from '../../shared/quote.js';
+
 export interface PresetPairing {
   id: string;
   occupation: string;
   hobbies: string;
   name: string;
-  tone: 'empowering' | 'philosophical' | 'zen' | 'poetic' | 'witty';
+  tone: Tone;
   label: string;
 }
 
